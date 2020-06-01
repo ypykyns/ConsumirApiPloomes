@@ -14,8 +14,6 @@ namespace ConsumirApiPloomes
 {
     public partial class CreateDeal : Form
     {
-
-
         public CreateDeal()
         {
             InitializeComponent();
@@ -23,12 +21,10 @@ namespace ConsumirApiPloomes
 
         private void label3_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label4_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -40,8 +36,7 @@ namespace ConsumirApiPloomes
 
                 novoNegocio.Amount = valorBox.Text;
                 novoNegocio.Title = tituloBox.Text;
-
-                // passando para JSON
+               
                 var json = new JavaScriptSerializer().Serialize(novoNegocio);
 
                 var client = new RestClient("https://api2.ploomes.com/Deals");
@@ -61,17 +56,11 @@ namespace ConsumirApiPloomes
                     DisplayMessageBoxText("Erro na criação da negociação, verifique os dados e tente novamente");
                 }
 
-               
-
-
-
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw new Exception(ex.Message);
             }
-
         }
 
 
@@ -82,17 +71,14 @@ namespace ConsumirApiPloomes
 
         private void clienteBox_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void valorBox_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
     }
 }

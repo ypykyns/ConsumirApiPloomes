@@ -28,10 +28,9 @@ namespace ConsumirApiPloomes
             int TypeId = 1; // empresa
 
                 if (Nome.Length == 0){
-                    DisplayMessageBoxText("Preencha o nome.");
+                    DisplayMessageBoxText("Preencha o nome do cliente.");
 
-                }else if ((pessoaBox.Checked && empresaBox.Checked) 
-                          ||
+                }else if ((pessoaBox.Checked && empresaBox.Checked) ||
                          (!pessoaBox.Checked && !empresaBox.Checked)){                        
                     DisplayMessageBoxText("Escolha um tipo de cliente.");
                 }else {
@@ -39,12 +38,10 @@ namespace ConsumirApiPloomes
                     if (pessoaBox.Checked) { TypeId = 2; } // Pessoa
 
                     // criar o novo cliente
-                    Contact novoCliente = new Contact(Nome, TypeId);
-
-                    // passando para JSON
+                    Contact novoCliente = new Contact(Nome, TypeId);                   
                     var json = new JavaScriptSerializer().Serialize(novoCliente);
 
-                    // requisição
+                 
                     var client = new RestClient("https://api2.ploomes.com/Contacts");
                     client.Timeout = -1;
                     var request = new RestRequest(Method.POST);
@@ -69,7 +66,6 @@ namespace ConsumirApiPloomes
           {
               throw new Exception(error.Message);
           }
-
         }
 
         private void pessoaBox_CheckedChanged(object sender, EventArgs e)

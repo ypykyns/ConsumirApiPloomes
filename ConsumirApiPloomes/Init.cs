@@ -22,8 +22,6 @@ namespace ConsumirApiPloomes
             InitializeComponent();
         }
 
-
-
         private void Form1_Load(object sender, EventArgs e)
         {
         }         
@@ -47,7 +45,6 @@ namespace ConsumirApiPloomes
             t3 = new Thread(createNewTaskWindow);
             t3.SetApartmentState(ApartmentState.STA);
             t3.Start();
-
         }
 
         private void update_deal_Click(object sender, EventArgs e)
@@ -84,8 +81,7 @@ namespace ConsumirApiPloomes
         private void createNewinteractRecordlWindow(object obj)
         {
             Application.Run(new InteractionRecord());
-        }
-        
+        }        
 
         private void createNewDealWindow(object obj)
         {
@@ -104,21 +100,14 @@ namespace ConsumirApiPloomes
 
         private void button1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-        }
-
-            
-
-       
+        }           
     }
 }

@@ -29,6 +29,7 @@ namespace ConsumirApiPloomes
 
         }
 
+        // ATUALIZAR A NEGOCIÇÃO
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -39,7 +40,10 @@ namespace ConsumirApiPloomes
                 }
                 else
                 {
-                    var obj = new { Title = "Negócio Atualizado"};
+                    var obj = new { 
+                                    Title = "Negócio Atualizado",
+                                    Amount = 15000
+                                   };
                     var json = new JavaScriptSerializer().Serialize(obj);
 
                     var client = new RestClient("https://api2.ploomes.com/Deals(" + idNegociacaobox.Text + ")");
@@ -48,13 +52,13 @@ namespace ConsumirApiPloomes
                     var request = new RestRequest(Method.PATCH);
                     request.AddHeader("User-Key", "D968CE9E530A2157F3512E870F03B434E5451390F2E4B0125BE54C4428680DC9CA3138DEB9BF987E0226B38B5151395452C48BF04F611BB64F6E270596D95480");
                     request.AddHeader("Content-Type", "application/json");
-                    request.AddParameter("application/json", "{\r\n    \"Title\": \"Negócio Atualizado\",\r\n    \"ContactId\": 8410347,\r\n    \"Amount\": 15000,\r\n    \"StageId\": 1,\r\n    \"OtherProperties\": [\r\n        {\r\n            \"FieldKey\": \"{fieldKey}\",\r\n            \"StringValue\": \"texto exemplo\"\r\n        },\r\n        {\r\n            \"FieldKey\": \"{fieldKey}\",\r\n            \"IntegerValue\": 2\r\n        }\r\n    ]\r\n}", ParameterType.RequestBody);
+                    request.AddParameter("application/json", json , ParameterType.RequestBody);
                     IRestResponse response = client.Execute(request);
 
                     if (response.IsSuccessful == true)
                     {
                         DisplayMessageBoxText("Valor da negociação atualizado para R$ 15.000,00");
-                        
+                        this.Close();                        
                     }
                     else {
                         DisplayMessageBoxText("Não foi possível atualizar a negociação. Verifique os dados e tente novamente.");
@@ -63,7 +67,6 @@ namespace ConsumirApiPloomes
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }
@@ -73,9 +76,9 @@ namespace ConsumirApiPloomes
             MessageBox.Show(text);
         }
 
+        // VENCER A NEGOCIÇÃO
         private void button2_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (idNegociacaobox.TextLength == 0)
@@ -83,8 +86,7 @@ namespace ConsumirApiPloomes
                     DisplayMessageBoxText("Informe o Id da negociação que deseja atualizar ou fechar.");
                 }
                 else
-                {
-                   
+                {                   
                     var client = new RestClient("https://api2.ploomes.com/Deals(" + idNegociacaobox.Text + ")/Win");                    
                     client.Timeout = -1;
                     var request = new RestRequest(Method.POST);
@@ -92,26 +94,22 @@ namespace ConsumirApiPloomes
                     request.AddHeader("Content-Type", "application/json");
                     request.AddParameter("application/json", "{\n\t\"Finished\": true\n}", ParameterType.RequestBody);
                     IRestResponse response = client.Execute(request);
-                   
 
-                    if (response.IsSuccessful == true)
-                    {
-                        DisplayMessageBoxText("PARABÉNS! NEGÓCIO FECHADO !");
-                        this.Close();
-                    }
-                    else
-                    {
-                        DisplayMessageBoxText("Erro ao fechar o negócio, verifique os dados e tente novamente");
-                    }
+                   if (response.IsSuccessful == true)
+                     {
+                       DisplayMessageBoxText("PARABÉNS! NEGÓCIO FECHADO !");
+                       this.Close();
+                     }else
+                          {
+                           DisplayMessageBoxText("Erro ao fechar o negócio, verifique os dados e tente novamente");
+                          }
                 }
             }
             catch (Exception ex)
             {
-
-                throw new Exception(ex.Message);
+             throw new Exception(ex.Message);
             }
-        }
-        
+        }        
     }
-    }
+ }
 

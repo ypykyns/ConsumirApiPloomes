@@ -1,9 +1,13 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
+using RestSharp.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,7 +27,7 @@ namespace ConsumirApiPloomes
         {
             try
             {
-                if (idClienteBox.TextLength == 0)
+                if (idNegocioBox.TextLength == 0)
                 {
                     DisplayMessageBoxText("informe o cliente para atribuir a tarefa");
                 }
@@ -34,12 +38,10 @@ namespace ConsumirApiPloomes
                     novaTarefa.Description = descricaoTarefaBox.Text;
                     novaTarefa.Title = tituloTarefaBox.Text;
                     novaTarefa.DateTime = dateTimeBox.Value;
-                    novaTarefa.ContactId = idClienteBox.Text;
+                    novaTarefa.ContactId = idNegocioBox.Text;
 
-                    // passando para JSON
                     var json = new JavaScriptSerializer().Serialize(novaTarefa);
 
-                    // requisição
                     var client = new RestClient("https://api2.ploomes.com/Tasks");
                     client.Timeout = -1;
                     var request = new RestRequest(Method.POST);
@@ -55,18 +57,13 @@ namespace ConsumirApiPloomes
                     }
                     else {
                         DisplayMessageBoxText("Erro na criação da tarefa, verifique os dados informados e tente novamente.");
-                    }
-                    
-
+                    }                    
                 }
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
-
-
         }
 
         private void DisplayMessageBoxText(string text)
@@ -76,12 +73,10 @@ namespace ConsumirApiPloomes
 
         private void dateTimeBox_ValueChanged(object sender, EventArgs e)
         {
-
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-
-        }
+        }       
     }
 }
