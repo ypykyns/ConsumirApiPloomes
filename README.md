@@ -4,7 +4,7 @@ Para testar a aplicação execute o arquivo ConsumirApiPloomes.exe que fica
 dentro da pasta ConsumirApiPloomes\ConsumirApiPloomes\bin\Debug.
 
 Observações:  
-- Para criação de um novo cliente escolha a opção "Criar Cliente" ni menu principal, e
+- Para criação de um novo cliente escolha a opção "Criar Cliente" no menu principal, e
   na nova tela escolha o tipo de cliente, informe o nome e clique em "Criar". 
   
 - Para criar uma nova negociação, escolha a opção "Criar Negociação" no menu principal, e na 
@@ -30,4 +30,4 @@ Observações:
   
   Em caso de dúvidas:  lesdsousa@gmail.com
   
-  Obrigado pela oportunidade.
+  
